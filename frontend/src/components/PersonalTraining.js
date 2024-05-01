@@ -9,6 +9,8 @@ import {useAuth} from './AuthProvider';
 import {useNavigate} from 'react-router-dom';
 import {request} from '../axios_helper';
 
+const userId = localStorage.getItem('id')
+
 function VerticalDivider() {
     return (
         <div
@@ -24,7 +26,6 @@ function VerticalDivider() {
 }
 
 function TimeSlots({timeSlots}) {
-    const userId = localStorage.getItem('id')
 
     const [currentTimeSlots, setCurrentTimeSlots] = useState(timeSlots);
 
@@ -95,7 +96,7 @@ const PersonalTraining = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (!isAuthenticated) {
+        if (!userId) {
             navigate('/profile');
         }
         request('GET', `/training/filter?date=${selectedDate.format('YYYY-MM-DDTHH:MM:ss')}`)

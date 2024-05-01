@@ -13,7 +13,7 @@ const VisitHistory = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (!isAuthenticated) {
+        if (!userId) {
             navigate('/profile');
         }
         request('GET', `/training/filter?userId=${userId}`)

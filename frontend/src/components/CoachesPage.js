@@ -22,6 +22,7 @@ function CoachesPage() {
     const [trainers, setTrainers] = useState([]);
 
     const {isAuthenticated, login, logout} = useAuth();
+    const userId = localStorage.getItem("id");
 
     const navigate = useNavigate();
 
@@ -36,7 +37,7 @@ function CoachesPage() {
     };
 
     useEffect(() => {
-        if (!isAuthenticated) {
+        if (!userId) {
             navigate('/profile');
         }
         getCoachesInfo();
