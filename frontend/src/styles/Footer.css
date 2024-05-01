@@ -1,0 +1,46 @@
+.footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: darkslategrey;
+    padding: 1em;
+    color: white;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.footer-brand {
+    display: flex;
+    align-items: center;
+}
+
+.footer-brand .logo {
+    width: 50px;
+    height: auto;
+    margin-right: 10px;
+    filter: invert(1);
+}
+
+.footer-nav {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+}
+
+.footer-nav a,
+.footer-nav a:hover,
+.footer-nav a:active,
+.footer-nav a:visited {
+    text-decoration: none;
+    color: white;
+}
+
+.footer-section span {
+    font-size: 0.85em;
+}
