@@ -33,7 +33,7 @@ const VisitHistory = () => {
             alignItems: "center",
             flexDirection: "column"
         }}>
-            <h2 style={{margin:"1%"}}>История тренировок</h2>
+            <h2 style={{margin: "1%"}}>История тренировок</h2>
             <Box sx={{width: '100%'}}>
                 {trainings.map((training) => {
 
