@@ -34,7 +34,7 @@ const LoginForm = ({onLogin, onRegister}) => {
     };
 
     return (
-        <Box display="flex" justifyContent="center" pt={15}>
+        <Box display="flex" justifyContent="center" mt={"3%"}>
             <Paper elevation={3} style={{padding: '20px', width: '400px'}}>
                 <Tabs value={activeTab} onChange={handleTabChange} centered>
                     <Tab label="Авторизация"/>
@@ -76,7 +76,7 @@ const LoginForm = ({onLogin, onRegister}) => {
 
                 <div hidden={activeTab !== 1}>
                     <form onSubmit={onSubmitRegister}>
-                        <Box mt={2}>
+                        <Box mt={0}>
                             <TextField
                                 label="Имя"
                                 name="firstName"
@@ -87,7 +87,7 @@ const LoginForm = ({onLogin, onRegister}) => {
                                 value={formData.firstName}
                             />
                         </Box>
-                        <Box mt={2}>
+                        <Box mt={0}>
                             <TextField
                                 label="Фамилия"
                                 name="lastName"
@@ -98,7 +98,7 @@ const LoginForm = ({onLogin, onRegister}) => {
                                 value={formData.lastName}
                             />
                         </Box>
-                        <Box mt={2}>
+                        <Box mt={0}>
                             <TextField
                                 label="Логин"
                                 name="login"
@@ -109,7 +109,7 @@ const LoginForm = ({onLogin, onRegister}) => {
                                 value={formData.login}
                             />
                         </Box>
-                        <Box mt={2}>
+                        <Box mt={0}>
                             <TextField
                                 label="Пароль"
                                 name="password"

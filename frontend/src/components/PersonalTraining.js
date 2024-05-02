@@ -25,10 +25,7 @@ function VerticalDivider() {
     );
 }
 
-function TimeSlots({timeSlots}) {
-
-    const [currentTimeSlots, setCurrentTimeSlots] = useState(timeSlots);
-
+function TimeSlots({timeSlots, setTimeSlots}) {
     const groupedByCoach = timeSlots.reduce((acc, timeslot) => {
         const coachKey = `${timeslot.coach.name} ${timeslot.coach.surname}`;
         if (!acc[coachKey]) {
@@ -42,10 +39,25 @@ function TimeSlots({timeSlots}) {
         request("POST", `/training/enroll/${userId}/${id}`)
             .then((response) => {
                 console.log(response.data);
+
+                const updatedTimeSlots = timeSlots.map(timeslot => {
+                    console.log("TIMESLOT");
+                    console.log(timeslot);
+                    if (timeslot.id === id) {
+                        console.log("== TO RETURN == ");
+                        console.log({...timeslot, user: response.data.user});
+                        return {...timeslot, user: response.data.user};
+                    }
+                    return timeslot;
+                });
+
+                setTimeSlots(updatedTimeSlots);
             })
             .catch((error) => {
+                console.error('Error:', error);
             });
     };
+
     return (
         <Box sx={{width: "100%"}}>
             {Object.entries(groupedByCoach).map(([coach, timeslots]) => {
@@ -86,7 +98,6 @@ function TimeSlots({timeSlots}) {
             })}
         </Box>
     );
-
 }
 
 const PersonalTraining = () => {
@@ -99,18 +110,10 @@ const PersonalTraining = () => {
         if (!userId) {
             navigate('/profile');
         }
-        request('GET', `/training/filter?date=${selectedDate.format('YYYY-MM-DDTHH:MM:ss')}`)
-            .then((response) => {
-                console.log(response.data);
-                setTimeSlots(response.data);
-            })
-            .catch((error) => {
-                console.error('Error fetching timeslots data:', error);
-            });
-    }, []);
+        fetchTimeSlots(selectedDate);
+    }, [selectedDate, navigate]);
 
-    const handleDateChange = (date) => {
-        setSelectedDate(date);
+    const fetchTimeSlots = (date) => {
         request('GET', `/training/filter?date=${date.format('YYYY-MM-DDTHH:MM:ss')}`)
             .then((response) => {
                 console.log(response.data);
@@ -119,6 +122,11 @@ const PersonalTraining = () => {
             .catch((error) => {
                 console.error('Error fetching timeslots data:', error);
             });
+    };
+
+    const handleDateChange = (date) => {
+        setSelectedDate(date);
+        // fetchTimeSlots(date);
     };
 
     return isAuthenticated ? (
@@ -130,7 +138,14 @@ const PersonalTraining = () => {
                         <h1>Выберите дату</h1>
 
                         <Box sx={{height: '3%'}}/>
-                        <StaticDatePicker orientation="landscape" value={selectedDate} onChange={handleDateChange}/>
+                        <StaticDatePicker
+                            orientation="landscape"
+                            value={selectedDate}
+                            onChange={handleDateChange}
+                            slotProps={
+                                {actionBar: {actions: ['today']}}
+                            }
+                        />
                     </Box>
 
                     <VerticalDivider/>
@@ -140,8 +155,7 @@ const PersonalTraining = () => {
                         <h1>Выберите доступный слот</h1>
                         <Box sx={{height: '3%'}}/>
                         {timeSlots && (
-                            <TimeSlots timeSlots={timeSlots}/>
-                            // sx={{width: '10%'}}/>
+                            <TimeSlots timeSlots={timeSlots} setTimeSlots={setTimeSlots}/>
                         )}
                     </Box>
                 </Box>
