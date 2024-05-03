@@ -31,7 +31,7 @@ public class TrainingService {
         return trainingRepository.findAll(TrainingSpecifications.filter(userId, coachId, date), sortByTrainingDateTimeAsc);
     }
 
-    public void enrollUserInTraining(Long userId, Long trainingId) {
+    public User enrollUserInTraining(Long userId, Long trainingId) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("User not found with ID: " + userId));
 
@@ -41,6 +41,8 @@ public class TrainingService {
         training.setUser(user);
 
         trainingRepository.save(training);
+
+        return user;
     }
 
     public void cancelUserInTraining(Long trainingId) {

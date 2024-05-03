@@ -2,6 +2,7 @@ package org.mygoal.fitnessapp.backend.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.mygoal.fitnessapp.backend.model.Training;
+import org.mygoal.fitnessapp.backend.model.User;
 import org.mygoal.fitnessapp.backend.service.TrainingService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -30,9 +31,9 @@ public class TrainingController {
     }
 
     @PostMapping("/training/enroll/{userId}/{trainingId}")
-    public ResponseEntity<String> bookTraining(@PathVariable Long userId, @PathVariable Long trainingId) {
-        trainingService.enrollUserInTraining(userId, trainingId);
-        return ResponseEntity.ok("Booking successful");
+    public ResponseEntity<User> bookTraining(@PathVariable Long userId, @PathVariable Long trainingId) {
+        User user = trainingService.enrollUserInTraining(userId, trainingId);
+        return ResponseEntity.ok(user);
     }
 
     @PostMapping("/training/cancel/{trainingId}")
