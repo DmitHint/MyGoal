@@ -16,7 +16,6 @@ function App() {
         <Router>
             <div>
                 <Header/>
-                {/*<main style={{height: '70vh'}}>*/}
                 <main>
                     <Routes>
                         <Route path="/" element={<UserContent/>}/>

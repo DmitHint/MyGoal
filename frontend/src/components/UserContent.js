@@ -16,6 +16,7 @@ const UserContent = () => {
                 login(response.data.token, response.data.id);
             })
             .catch((error) => {
+                console.log("ERROR");
                 logout();
             });
     };
