@@ -35,49 +35,6 @@ function TimeSlots({timeSlots, setTimeSlots}) {
         return acc;
     }, {});
 
-    // const handleClick = (id) => {
-    //     console.log("== TIMESLOTS ==");
-    //     console.log(timeSlots);
-    //     console.log("== CLICKED_ID ==");
-    //     console.log(id);
-    //     console.log("== USER_ID ==");
-    //     console.log(userId);
-    //     if () {
-    //         request("POST", `/training/enroll/${userId}/${id}`)
-    //             .then((response) => {
-    //                 const updatedTimeSlots = timeSlots.map(timeslot => {
-    //                     console.log("TIMESLOT");
-    //                     console.log(timeslot);
-    //                     if (timeslot.id === id) {
-    //                         console.log("== TO RETURN == ");
-    //                         console.log({...timeslot, user: response.data});
-    //                         return {...timeslot, user: response.data};
-    //                     }
-    //                     return timeslot;
-    //                 });
-    //                 setTimeSlots(updatedTimeSlots);
-    //             })
-    //             .catch((error) => {
-    //                 console.error('Error:', error);
-    //             });
-    //
-    //     } else {
-    //         request("POST", `/training/cancel/${id}`)
-    //             .then((response) => {
-    //                 const updatedTimeSlots = timeSlots.map(timeslot => {
-    //                     if (timeslot.id === id) {
-    //                         return {...timeslot, user: null};
-    //                     }
-    //                     return timeslot;
-    //                 });
-    //                 setTimeSlots(updatedTimeSlots);
-    //             })
-    //             .catch((error) => {
-    //                 console.error('Error:', error);
-    //             });
-    //     }
-    // };
-
     const handleClick = (id) => {
         const timeslotToModify = timeSlots.find(timeslot => timeslot.id === id);
         if (timeslotToModify && timeslotToModify.user) {
@@ -127,7 +84,7 @@ function TimeSlots({timeSlots, setTimeSlots}) {
                         {timeslots.map((timeslot) => {
                             let variant = "outlined";
                             if (timeslot.user !== null) {
-                                if (timeslot.user.id == localStorage.getItem('id')) {
+                                if (timeslot.user.id == userId) {
                                     variant = "contained";
                                 } else {
                                     return null;

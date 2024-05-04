@@ -1,6 +1,6 @@
 import '../styles/App.css';
 import '../styles/Header.css';
-import {BrowserRouter as Router, Route, Routes, NavLink} from 'react-router-dom';
+import {NavLink} from 'react-router-dom';
 
 
 const Header = () => {
@@ -11,7 +11,7 @@ const Header = () => {
                     src={require('../assets/logo.png')}
                     width={100}
                     height={80}
-                    style={{ filter: 'invert(1)' }}
+                    style={{filter: 'invert(1)'}}
                 />
                 MyGoal - Fitness
             </div>

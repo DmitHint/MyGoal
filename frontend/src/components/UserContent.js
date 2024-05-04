@@ -9,10 +9,8 @@ const UserContent = () => {
     const {login, logout, isAuthenticated} = useAuth();
 
     const onLogin = (username, password) => {
-        console.log("login", username, password);
         request("POST", "/login", {login: username, password: password})
             .then((response) => {
-                console.log(response.data);
                 login(response.data.token, response.data.id);
             })
             .catch((error) => {

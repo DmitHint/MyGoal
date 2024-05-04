@@ -2,7 +2,6 @@ import './styles/App.css';
 import {BrowserRouter as Router, Route, Routes, NavLink} from 'react-router-dom';
 import Header from "./components/Header";
 import PersonalTraining from "./components/PersonalTraining";
-import Trainers from "./components/CoachesPage";
 import Footer from "./components/Footer";
 import UserContent from "./components/UserContent";
 import VisitHistory from "./components/VisitHistory";

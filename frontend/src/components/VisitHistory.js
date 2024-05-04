@@ -19,7 +19,6 @@ const VisitHistory = () => {
         request('GET', `/training/filter?userId=${userId}`)
             .then((response) => {
                 setTrainings(response.data);
-                console.log(response.data);
             })
             .catch((error) => {
                 console.error('Error fetching training history:', error);
