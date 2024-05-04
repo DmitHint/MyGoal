@@ -25,7 +25,7 @@ services:
     ports:
       - '5432:5432'
     volumes:
-      - ./backend/src/main/resources/sql/init.sql:/docker-entrypoint-initdb.d/
+      - ./backend/src/main/resources/sql/init.sql:/docker-entrypoint-initdb.d/init.sql
 
   pgadmin:
     image: dpage/pgadmin4:latest
