@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  frontend:
+    build: ./frontend
+    ports:
+      - '3000:3000'
+    depends_on:
+      - backend
+
+  backend:
+    build: ./backend
+    ports:
+      - '8080:8080'
+    depends_on:
+      - postgresql-db
+
+
+  postgresql-db:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: mygoal
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    ports:
+      - '5432:5432'
+    volumes:
+      - ./backend/src/main/resources/sql/init.sql:/docker-entrypoint-initdb.d/
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    environment:
+      PGADMIN_DEFAULT_EMAIL: mygoal-fitness@yandex.ru
+      PGADMIN_DEFAULT_PASSWORD: password
+    ports:
+      - '5050:80'
+    depends_on:
+      - postgresql-db
