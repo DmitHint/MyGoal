@@ -8,6 +8,7 @@ import org.mygoal.fitnessapp.backend.dto.SignUpDto;
 import org.mygoal.fitnessapp.backend.dto.UserDto;
 import org.mygoal.fitnessapp.backend.service.UserService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,6 +17,7 @@ import java.net.URI;
 
 @RequiredArgsConstructor
 @RestController
+@CrossOrigin
 public class AuthController {
 
     private final UserService userService;
