@@ -90,7 +90,12 @@ function TimeSlots({timeSlots, setTimeSlots}) {
                                     return null;
                                 }
                             }
-                            const [year, month, day, hour, minute, second] = timeslot.trainingDateTime;
+
+                            const date = new Date(timeslot.trainingDateTime);
+
+                            const hour = date.getHours();
+                            const minute = date.getMinutes();
+
                             const time = `${String(hour).padStart(2, '0')}:${String(minute).padStart(2, '0')}`;
 
                             return (
