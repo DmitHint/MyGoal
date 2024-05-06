@@ -29,14 +29,11 @@ public class UserAuthProvider {
     @PostConstruct
     protected void init() {
         secretKey = Base64.getEncoder().encodeToString(secretKey.getBytes());
-        System.out.println(secretKey);
     }
 
     public String createToken(String login) {
         Date now = new Date();
 //        Date validity = new Date(now.getTime() + 3600000); // 1 hour
-
-        System.out.println("createToken: " + login);
 
         Algorithm algorithm = Algorithm.HMAC256(secretKey);
         return JWT.create()

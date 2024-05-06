@@ -25,6 +25,8 @@ public class TrainingSpecifications {
                 LocalDateTime startOfDay = dateTime.toLocalDate().atStartOfDay();
                 LocalDateTime endOfDay = dateTime.toLocalDate().atTime(23, 59, 59);
 
+                predicate = criteriaBuilder.and(predicate, criteriaBuilder.greaterThanOrEqualTo(root.<LocalDate>get("trainingDateTime"), currentDate));
+
                 predicate = criteriaBuilder.and(
                         predicate,
                         criteriaBuilder.between(root.get("trainingDateTime"), startOfDay, endOfDay)
@@ -39,29 +41,3 @@ public class TrainingSpecifications {
         };
     }
 }
-
-
-//
-//public class TrainingSpecifications {
-//    public static Specification<Training> filter(Long userId, Long coachId, LocalDateTime date) {
-//        return (root, query, criteriaBuilder) -> {
-//            CriteriaQuery<Training> criteriaQuery = criteriaBuilder.createQuery(Training.class);
-//            Root<Training> rootEntity = criteriaQuery.from(Training.class);
-//            Predicate predicate = criteriaBuilder.conjunction();
-//
-//            if (userId != null) {
-//                predicate = criteriaBuilder.and(predicate, criteriaBuilder.equal(rootEntity.get("user").get("id"), userId));
-//            }
-//
-//            if (coachId != null) {
-//                predicate = criteriaBuilder.and(predicate, criteriaBuilder.equal(rootEntity.get("coach").get("id"), coachId));
-//            }
-//
-//            if (date != null) {
-//                predicate = criteriaBuilder.and(predicate, criteriaBuilder.;
-//            }
-//
-//            return predicate;
-//        };
-//    }
-//}
