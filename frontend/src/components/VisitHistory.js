@@ -35,10 +35,14 @@ const VisitHistory = () => {
             <h2 style={{margin: "1%"}}>История тренировок</h2>
             <Box sx={{width: '100%'}}>
                 {trainings.map((training) => {
+                    const datePart = training.trainingDateTime.split("T")[0];
+                    const timePart = training.trainingDateTime.split("T")[1];
 
-                    const trainingDateTime = dayjs(new Date(...training.trainingDateTime));
-                    const formattedDate = trainingDateTime.format('DD.MM.YYYY');
-                    const formattedTime = trainingDateTime.format('HH:mm');
+                    const [year, month, day] = datePart.split("-");
+                    const formattedDate = `${day}.${month}.${year}`;
+
+                    const [hours, minutes] = timePart.split(":");
+                    const formattedTime = `${hours}:${minutes}`;
 
                     let bgColor = '';
                     if (training.status === 'finished') {

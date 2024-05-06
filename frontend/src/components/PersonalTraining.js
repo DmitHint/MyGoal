@@ -31,7 +31,9 @@ function TimeSlots({timeSlots, setTimeSlots}) {
         if (!acc[coachKey]) {
             acc[coachKey] = [];
         }
-        acc[coachKey].push(timeslot);
+        // if (timeslot.status === 'not started') {
+            acc[coachKey].push(timeslot);
+        // }
         return acc;
     }, {});
 
