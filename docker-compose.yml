@@ -28,6 +28,8 @@ services:
       POSTGRES_DB: mygoal
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
     ports:
       - '5432:5432'
 
@@ -41,3 +43,6 @@ services:
     depends_on:
       postgresql-db:
         condition: service_healthy
+
+volumes:
+  postgres_data:
