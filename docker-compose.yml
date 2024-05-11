@@ -19,6 +19,7 @@ services:
 
   postgresql-db:
     image: postgres:latest
+    command: postgres -c 'listen_addresses=*'
     healthcheck:
       test: ["CMD", "pg_isready", "-U", "postgres"]
       interval: 30s
@@ -30,6 +31,7 @@ services:
       POSTGRES_PASSWORD: password
     volumes:
       - postgres_data:/var/lib/postgresql/data
+      - ./backend/custom_pg_hba.conf:/var/lib/postgresql/data/pg_hba.conf
     ports:
       - '5432:5432'
 
