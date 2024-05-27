@@ -7,6 +7,9 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+/**
+ * Handles exceptions thrown by the application and converts them to HTTP responses with appropriate status codes and error messages.
+ */
 @ControllerAdvice
 public class RestExceptionHandler {
 

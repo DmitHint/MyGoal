@@ -2,6 +2,9 @@ package org.mygoal.fitnessapp.backend.exceptions;
 
 import org.springframework.http.HttpStatus;
 
+/**
+ * Base class for all application exceptions.
+ */
 public class AppException extends RuntimeException {
 
     private final HttpStatus status;
@@ -14,5 +17,5 @@ public class AppException extends RuntimeException {
     public HttpStatus getStatus() {
         return status;
     }
-}
 
+}

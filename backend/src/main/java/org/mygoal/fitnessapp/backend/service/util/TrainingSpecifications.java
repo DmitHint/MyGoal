@@ -6,7 +6,19 @@ import org.springframework.data.jpa.domain.Specification;
 import java.time.LocalDateTime;
 import java.time.LocalDate;
 
+/**
+ * Class containing specifications for filtering workouts.
+ */
 public class TrainingSpecifications {
+
+    /**
+     * Method for creating a specification that filters workouts by the specified parameters.
+     *
+     * @param userId   User ID.
+     * @param coachId  Coach ID.
+     * @param dateTime Workout date and time.
+     * @return Specification that can be used to filter workouts.
+     */
     public static Specification<Training> filter(Long userId, Long coachId, LocalDateTime dateTime) {
         return (root, query, criteriaBuilder) -> {
             Predicate predicate = criteriaBuilder.conjunction();

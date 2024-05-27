@@ -6,7 +6,9 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
-
+/**
+ * Configures various aspects of the application's behavior.
+ */
 @Configuration 
 @EnableJpaRepositories(basePackages = "org.mygoal.fitnessapp.backend.repository")
 @EnableAspectJAutoProxy

@@ -14,43 +14,60 @@ import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 
+/**
+ * The service is responsible for sending a letter with body parameters to the specified address.
+ */
 @Service
 @RequiredArgsConstructor
 public class EmailService {
+
+    /**
+     * JavaMailSender for sending an email.
+     */
     private final JavaMailSender emailSender;
+
+    /**
+     * Environment for getting properties from the application.properties file.
+     */
     private final Environment environment;
 
+    /**
+     * This method asynchronously sends email with user's body parameters to the specified address.
+     *
+     * @param user the user who will receive an email
+     * @throws MailException if an error occurs while sending an email
+     */
     @Async
     public void sendEmailParams(User user) throws MailException {
         LocalDateTime moscowTime = LocalDateTime.now(ZoneId.of("Europe/Moscow"));
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT);
         String formattedDate = moscowTime.format(formatter);
         SimpleMailMessage mail = new SimpleMailMessage();
         mail.setFrom(environment.getProperty("spring.mail.username"));
         mail.setTo(user.getEmail());
-        mail.setSubject("Параметры тела (" + formattedDate + ")");
+        mail.setSubject("Body Parameters (" + formattedDate + ")");
 
         mail.setText(String.format(
                 """
-                Ваши параметры тела на %s:
+                Your body parameters as of %s:
         
-                Рост: %.1f см
+                Height: %.1f cm
         
-                Вес: %.1f кг
+                Weight: %.1f kg
         
-                Жир: %.1f%%
+                Fat: %.1f%%
         
-                Ширина плеч: %.1f см
+                Shoulder Width: %.1f cm
         
-                Обхват плеча: %.1f см
+                Shoulder Circumference: %.1f cm
         
-                Обхват груди: %.1f см
+                Chest Circumference: %.1f cm
         
-                Обхват талии: %.1f см
+                Waist Circumference: %.1f cm
         
-                Обхват бедер: %.1f см
+                Hip Circumference: %.1f cm
         
-                Обхват икр: %.1f см
+                Calf Circumference: %.1f cm
                 """,
                 formattedDate,
                 user.getHeight(),
@@ -67,4 +84,3 @@ public class EmailService {
         emailSender.send(mail);
     }
 }
-
