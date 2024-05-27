@@ -12,12 +12,23 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.List;
 
+/**
+ * The service is responsible for updating the status of {@link Training} objects.
+ * It runs a scheduled task every 5 minutes to check if the training has started, is ongoing, or has finished.
+ */
 @Service
 @RequiredArgsConstructor
 public class TrainingStatusService {
 
+    /**
+     * Repository for working with {@link Training} objects.
+     */
     private final TrainingRepository trainingRepository;
 
+    /**
+     * This method is executed every 5 minutes by the Spring Framework scheduler.
+     * It updates the status of all {@link Training} objects in the database.
+     */
     @Transactional
     @Scheduled(fixedRate = 300000L)
     public void updateTrainingStatuses() {
