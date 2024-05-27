@@ -13,6 +13,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @ControllerAdvice
 public class RestExceptionHandler {
 
+    /**
+     * Exception handler for the AppException class.
+     * This method handles exceptions of type AppException and returns a ResponseEntity with error information.
+     *
+     * @param ex The AppException to be handled.
+     * @return ResponseEntity with an ErrorDto object containing the error message and status.
+     */
     @ExceptionHandler(value = { AppException.class })
     @ResponseBody
     public ResponseEntity<ErrorDto> handleException(AppException ex) {

@@ -8,8 +8,17 @@ import org.springframework.security.core.GrantedAuthority;
  */
 @AllArgsConstructor
 public class RolesGrantedAuthorityAdapter implements GrantedAuthority {
+
+    /**
+     * Authority of the role
+     */
     private String authority;
 
+    /**
+     * Returns the authority of the role.
+     *
+     * @return the authority of the role
+     */
     @Override
     public String getAuthority() {
         return this.authority;

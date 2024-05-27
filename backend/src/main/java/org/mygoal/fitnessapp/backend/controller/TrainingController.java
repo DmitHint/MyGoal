@@ -10,14 +10,12 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDateTime;
 import java.util.List;
 
-
-@RestController
-@RequiredArgsConstructor
-@CrossOrigin
-
 /**
  * REST API controller for managing Training data in the FitnessApp backend.
  */
+@RestController
+@RequiredArgsConstructor
+@CrossOrigin
 public class TrainingController {
 
     /**

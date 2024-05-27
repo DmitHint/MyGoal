@@ -59,6 +59,12 @@ public class UserAuthProvider {
                 .sign(algorithm);
     }
 
+    /**
+     * Validates the given JWT token.
+     *
+     * @param token The JWT token to be validated.
+     * @return An Authentication object if the token is valid, containing user information.
+     */
     public Authentication validateToken(String token) {
         Algorithm algorithm = Algorithm.HMAC256(secretKey);
 
