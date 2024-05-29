@@ -17,6 +17,13 @@ import java.util.Base64;
 import java.util.Collections;
 import java.util.Date;
 
+/**
+ * This class is responsible for creating and validating JWT tokens.
+ * It uses the HS256 algorithm and a secret key to sign and verify tokens.
+ * The secret key is stored in the application.properties file.
+ * The createToken method takes a login as input and returns a JWT token.
+ * The validateToken method takes a token as input and returns an Authentication object if the token is valid.
+ */
 @RequiredArgsConstructor
 @Component
 public class UserAuthProvider {
@@ -26,11 +33,20 @@ public class UserAuthProvider {
 
     private final UserService userService;
 
+    /**
+     * This method is called after the bean is instantiated and initializes the secret key.
+     */
     @PostConstruct
     protected void init() {
         secretKey = Base64.getEncoder().encodeToString(secretKey.getBytes());
     }
 
+    /**
+     * This method creates a JWT token for the given login.
+     *
+     * @param login the login of the user
+     * @return the JWT token
+     */
     public String createToken(String login) {
         Date now = new Date();
 //        Date validity = new Date(now.getTime() + 3600000); // 1 hour
@@ -43,6 +59,12 @@ public class UserAuthProvider {
                 .sign(algorithm);
     }
 
+    /**
+     * Validates the given JWT token.
+     *
+     * @param token The JWT token to be validated.
+     * @return An Authentication object if the token is valid, containing user information.
+     */
     public Authentication validateToken(String token) {
         Algorithm algorithm = Algorithm.HMAC256(secretKey);
 

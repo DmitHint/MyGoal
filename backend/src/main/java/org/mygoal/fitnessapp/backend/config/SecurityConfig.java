@@ -15,6 +15,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
+/**
+ * This class configures Spring Security for the application. It enables web security, method security, and disables CSRF and CORS protection.
+ * It also defines the authentication entry point and authentication provider, adds a JWT authentication filter, and sets the session creation policy to stateless.
+ * The authorization rules are defined to allow access to certain endpoints without authentication and require authentication for all other endpoints.
+ */
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
@@ -24,12 +29,23 @@ public class SecurityConfig {
     private final UserAuthenticationEntryPoint userAuthenticationEntryPoint;
     private final UserAuthProvider userAuthProvider;
 
+    /**
+     * Creates a password encoder bean.
+     *
+     * @return the password encoder bean
+     */
     @Bean
     public PasswordEncoder encoder() {
         return new BCryptPasswordEncoder();
     }
 
-
+    /**
+     * Configures the security filter chain.
+     *
+     * @param http the HttpSecurity object to configure
+     * @return the security filter chain
+     * @throws Exception if an error occurs while configuring the security filter chain
+     */
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
