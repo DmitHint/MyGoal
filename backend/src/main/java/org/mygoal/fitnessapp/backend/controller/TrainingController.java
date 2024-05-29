@@ -16,6 +16,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @CrossOrigin
+@RequestMapping("/api/training")
 public class TrainingController {
 
     /**
@@ -28,7 +29,7 @@ public class TrainingController {
      *
      * @return A ResponseEntity object containing a list of Training objects and an HTTP 200 (OK) status code.
      */
-    @GetMapping("/training")
+    @GetMapping("")
     public ResponseEntity<List<Training>> getTrainings() {
         return ResponseEntity.ok(trainingService.getTrainings());
     }
@@ -41,7 +42,7 @@ public class TrainingController {
      * @param date    (optional) Filter by the training date.
      * @return A ResponseEntity object containing a list of Training objects and an HTTP 200 (OK) status code.
      */
-    @GetMapping(value = "/training/filter")
+    @GetMapping(value = "/filter")
     public ResponseEntity<List<Training>> getTrainingsWithFilter(
             @RequestParam(required = false) Long userId,
             @RequestParam(required = false) Long couchId,
@@ -56,7 +57,7 @@ public class TrainingController {
      * @param trainingId The ID of the training session to enroll in.
      * @return A ResponseEntity object containing the updated User object and an HTTP 200 (OK) status code.
      */
-    @PostMapping("/training/enroll/{userId}/{trainingId}")
+    @PostMapping("/enroll/{userId}/{trainingId}")
     public ResponseEntity<User> bookTraining(@PathVariable Long userId, @PathVariable Long trainingId) {
         User user = trainingService.enrollUserInTraining(userId, trainingId);
         return ResponseEntity.ok(user);
@@ -68,7 +69,7 @@ public class TrainingController {
      * @param trainingId The ID of the training session to cancel.
      * @return A ResponseEntity object containing a success message and an HTTP 200 (OK) status code.
      */
-    @PostMapping("/training/cancel/{trainingId}")
+    @PostMapping("/cancel/{trainingId}")
     public ResponseEntity<String> cancelTraining(@PathVariable Long trainingId) {
         trainingService.cancelUserInTraining(trainingId);
         return ResponseEntity.ok("Cancel training successful");

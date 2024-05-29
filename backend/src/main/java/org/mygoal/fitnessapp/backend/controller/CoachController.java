@@ -6,9 +6,9 @@ import org.mygoal.fitnessapp.backend.service.CoachService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,6 +17,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @CrossOrigin
+@RequestMapping("/api/coach")
 public class CoachController {
 
     /**
@@ -29,7 +30,7 @@ public class CoachController {
      *
      * @return A ResponseEntity object containing a list of Coach objects and an HTTP 200 (OK) status code.
      */
-    @GetMapping("/coach/all")
+    @GetMapping("/all")
     public ResponseEntity<List<Coach>> getCoaches() {
         return ResponseEntity.ok(coachService.getCoachesList());
     }

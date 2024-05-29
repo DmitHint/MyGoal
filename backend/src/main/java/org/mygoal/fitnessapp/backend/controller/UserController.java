@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequiredArgsConstructor
 @CrossOrigin
+@RequestMapping("/api/profile")
 public class UserController {
 
     /**
@@ -32,7 +33,7 @@ public class UserController {
      * @param id The ID of the user to fetch.
      * @return A ResponseEntity object containing a UserDto object and an HTTP 200 (OK) status code.
      */
-    @GetMapping("/profile")
+    @GetMapping("")
     public ResponseEntity<UserDto> getUserById(@RequestParam Long id) {
         UserDto user = userService.getUserDtoById(id);
         return ResponseEntity.ok(user);
@@ -45,7 +46,7 @@ public class UserController {
      * @param email The new email address.
      * @return A ResponseEntity object containing the updated UserDto object and an HTTP 200 (OK) status code.
      */
-    @PostMapping("/profile/email")
+    @PostMapping("/email")
     public ResponseEntity<UserDto> changeUserEmail(@RequestParam Long id, String email) {
         UserDto user = userService.changeUserEmail(id, email);
         return ResponseEntity.ok(user);
@@ -58,7 +59,7 @@ public class UserController {
      * @param parameters The new physical parameters.
      * @return A ResponseEntity object containing the updated UserDto object and an HTTP 200 (OK) status code.
      */
-    @PostMapping("/profile/params")
+    @PostMapping("/params")
     public ResponseEntity<UserDto> changeUserParams(@RequestParam Long id, @RequestBody UserParameters parameters) {
         UserDto user = userService.changeUserParams(id, parameters);
         return ResponseEntity.ok(user);
@@ -70,7 +71,7 @@ public class UserController {
      * @param id The ID of the user to send the email to.
      * @return A ResponseEntity object with an HTTP 200 (OK) status code.
      */
-    @PostMapping("/profile/sendParams")
+    @PostMapping("/sendParams")
     public ResponseEntity<Void> sendEmailParams(@RequestParam Long id) {
         emailService.sendEmailParams(userService.getUserById(id));
         return ResponseEntity.ok().build();
