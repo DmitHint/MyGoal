@@ -4,22 +4,26 @@ services:
   frontend:
     build: ./frontend
     ports:
-      - '3000:3000'
+      - "3000:3000"
     depends_on:
       - backend
+    networks:
+      - internal_network
 
   backend:
     build: ./backend
     ports:
-      - '8080:8080'
+      - "8080:8080"
     depends_on:
       postgresql-db:
         condition: service_healthy
-
+    networks:
+      - internal_network
 
   postgresql-db:
     image: postgres:latest
-    command: postgres -c 'listen_addresses=*'
+    ports:
+      - "5432:5432"
     healthcheck:
       test: ["CMD", "pg_isready", "-U", "postgres"]
       interval: 30s
@@ -28,24 +32,40 @@ services:
     environment:
       POSTGRES_DB: mygoal
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: password
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     volumes:
       - postgres_data:/var/lib/postgresql/data
-      - ./backend/custom_pg_hba.conf:/var/lib/postgresql/data/pg_hba.conf
       - ./backend/00-init-db.sql:/docker-entrypoint-initdb.d/init.sql
-    ports:
-      - '5432:5432'
+    networks:
+      - internal_network
 
   pgadmin:
     image: dpage/pgadmin4:latest
-    environment:
-      PGADMIN_DEFAULT_EMAIL: mygoal-fitness@yandex.ru
-      PGADMIN_DEFAULT_PASSWORD: password
     ports:
-      - '5050:80'
+      - "5050:5050"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
     depends_on:
       postgresql-db:
         condition: service_healthy
+    networks:
+      - internal_network
+
+  nginx:
+    image: nginx:latest
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - frontend
+    networks:
+      - internal_network
 
 volumes:
   postgres_data:
+
+networks:
+  internal_network:
+    driver: bridge
