@@ -14,7 +14,7 @@ export const setAuthHeader = (token) => {
     }
 };
 
-axios.defaults.baseURL = config.baseURL;
+axios.defaults.baseURL = process.env.BACKEND_URL;
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 
 export const request = (method, url, data) => {
