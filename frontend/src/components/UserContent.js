@@ -9,19 +9,18 @@ const UserContent = () => {
     const {login, logout, isAuthenticated} = useAuth();
 
     const onLogin = (username, password) => {
-        request("POST", "/login", {login: username, password: password})
+        request("POST", "login", {login: username, password: password})
             .then((response) => {
                 login(response.data.token, response.data.id);
             })
             .catch((error) => {
-                console.log("ERROR");
                 logout();
             });
     };
 
     const onRegister = (firstName, lastName, username, password) => {
         console.log(firstName, lastName, username, password);
-        request("POST", "/register", {firstName: firstName, lastName: lastName, login: username, password: password})
+        request("POST", "register", {firstName: firstName, lastName: lastName, login: username, password: password})
             .then((response) => {
                 console.log(response.data);
                 login(response.data.token, response.data.id);

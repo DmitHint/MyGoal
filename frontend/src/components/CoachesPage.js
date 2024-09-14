@@ -27,7 +27,7 @@ function CoachesPage() {
     const navigate = useNavigate();
 
     const getCoachesInfo = () => {
-        request("GET", `/coach/all`)
+        request("GET", `coach/all`)
             .then((response) => {
                 setTrainers(response.data);
             })

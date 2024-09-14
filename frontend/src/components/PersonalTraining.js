@@ -40,7 +40,7 @@ function TimeSlots({timeSlots, setTimeSlots}) {
     const handleClick = (id) => {
         const timeslotToModify = timeSlots.find(timeslot => timeslot.id === id);
         if (timeslotToModify && timeslotToModify.user) {
-            request("POST", `/training/cancel/${id}`)
+            request("POST", `training/cancel/${id}`)
                 .then((response) => {
                     const updatedTimeSlots = timeSlots.map(timeslot => {
                         if (timeslot.id === id) {
@@ -54,7 +54,7 @@ function TimeSlots({timeSlots, setTimeSlots}) {
                     console.error('Error:', error);
                 });
         } else {
-            request("POST", `/training/enroll/${userId}/${id}`)
+            request("POST", `training/enroll/${userId}/${id}`)
                 .then((response) => {
                     const updatedTimeSlots = timeSlots.map(timeslot => {
                         if (timeslot.id === id) {
@@ -133,7 +133,7 @@ const PersonalTraining = () => {
     }, [selectedDate, navigate]);
 
     const fetchTimeSlots = (date) => {
-        request('GET', `/training/filter?date=${date.format('YYYY-MM-DDTHH:MM:ss')}`)
+        request('GET', `training/filter?date=${date.format('YYYY-MM-DDTHH:MM:ss')}`)
             .then((response) => {
                 console.log(response.data);
                 setTimeSlots(response.data);

@@ -16,7 +16,7 @@ const VisitHistory = () => {
         if (!userId) {
             navigate('/profile');
         }
-        request('GET', `/training/filter?userId=${userId}`)
+        request('GET', `training/filter?userId=${userId}`)
             .then((response) => {
                 setTrainings(response.data);
             })

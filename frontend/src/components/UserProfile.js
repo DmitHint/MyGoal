@@ -23,7 +23,7 @@ function UserProfile() {
     });
 
     const getUserInfo = (userId) => {
-        request("GET", `/profile?id=${userId}`)
+        request("GET", `profile?id=${userId}`)
             .then((response) => {
                 setUserInfo(response.data);
             })
@@ -48,7 +48,7 @@ function UserProfile() {
 
     const enableEditingEmail = () => {
         if (isEditableEmail) {
-            request("POST", `/profile/email?id=${userId}&email=${userInfo.email}`)
+            request("POST", `profile/email?id=${userId}&email=${userInfo.email}`)
                 .then((response) => {
                 })
                 .catch((error) => {
@@ -59,7 +59,7 @@ function UserProfile() {
     };
 
     const sendEmailParameter = () => {
-        request("POST", `/profile/sendParams?id=${userId}`)
+        request("POST", `profile/sendParams?id=${userId}`)
             .then((response) => {
             })
             .catch((error) => {
@@ -70,7 +70,7 @@ function UserProfile() {
 
     const enableEditingParams = () => {
         if (isEditableParams) {
-            request("POST", `/profile/params?id=${userId}`,
+            request("POST", `profile/params?id=${userId}`,
                 {
                     height: userInfo.height,
                     weight: userInfo.weight,

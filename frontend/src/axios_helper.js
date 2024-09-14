@@ -1,6 +1,4 @@
 import axios from 'axios';
-import {config} from "./config";
-
 
 export const getAuthToken = () => {
     return window.localStorage.getItem('token');
@@ -12,10 +10,10 @@ export const setAuthHeader = (token) => {
     } else {
         window.localStorage.removeItem("token");
     }
-};
+}
 
-axios.defaults.baseURL = process.env.BACKEND_URL;
-axios.defaults.headers.post['Content-Type'] = 'application/json';
+const apiUrl = process.env.REACT_APP_API_URL
+console.log(process.env)
 
 export const request = (method, url, data) => {
 
@@ -27,7 +25,7 @@ export const request = (method, url, data) => {
     return axios({
         method: method,
         headers: headers,
-        url: url,
+        url: apiUrl + "/" + url,
         data: data
     });
 };
