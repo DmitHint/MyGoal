@@ -3,11 +3,22 @@ version: '3.8'
 services:
   frontend:
     build: ./frontend
+    expose:
+      - 3000
     depends_on:
       - backend
+    networks:
+      - internal_network
+    environment:
+      REACT_APP_API_URL: "${API_URL}"
+      WDS_SOCKET_PORT: "0"
+      WDS_SOCKET_HOST: '0.0.0.0'
+
 
   backend:
     build: ./backend
+    expose:
+      - 8080
     environment:
       SPRING_DATASOURCE_URL: ${JDBC_URL}
       SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD}
@@ -21,9 +32,13 @@ services:
     depends_on:
       postgresql-db:
         condition: service_healthy
+    networks:
+      - internal_network
 
   postgresql-db:
     image: postgres:latest
+    expose:
+      - 5432
     healthcheck:
       test: ["CMD", "pg_isready", "-U", "postgres"]
       interval: 30s
@@ -35,24 +50,37 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    networks:
+      - internal_network
 
   pgadmin:
     image: dpage/pgadmin4:latest
+    expose:
+      - 5050
     environment:
       PGADMIN_DEFAULT_EMAIL: ${EMAIL}
       PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_PASSWORD}
     depends_on:
       postgresql-db:
         condition: service_healthy
+    networks:
+      - internal_network
 
   nginx:
     image: nginx:latest
     ports:
-      - "80:80"
+      - "8080:80"
     volumes:
       - ./nginx.conf:/etc/nginx/conf.d/default.conf
     depends_on:
       - frontend
+    networks:
+      - internal_network
 
 volumes:
   postgres_data:
+  jenkins_home:
+
+networks:
+  internal_network:
+    driver: bridge
