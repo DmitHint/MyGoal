@@ -14,8 +14,15 @@ export const setAuthHeader = (token) => {
 
 const apiUrl = process.env.REACT_APP_API_URL
 console.log(process.env)
+axios.defaults.headers.post['Content-Type'] = 'application/json';
 
 export const request = (method, url, data) => {
+    console.log("method");
+    console.log(method);
+    console.log("url");
+    console.log(url);
+    console.log("data");
+    console.log(data);
 
     let headers = {};
     if (getAuthToken() !== null && getAuthToken() !== "null") {
