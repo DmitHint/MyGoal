@@ -13,19 +13,10 @@ export const setAuthHeader = (token) => {
     }
 };
 
-console.log(process.env);
-
-axios.defaults.baseURL = process.env.REACT_APP_BACKEND_URL;
+axios.defaults.baseURL = process.env.REACT_APP_API_URL;
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 
 export const request = (method, url, data) => {
-    console.log("method");
-    console.log(method);
-    console.log("url");
-    console.log(url);
-    console.log("data");
-    console.log(data);
-
     let headers = {};
     if (getAuthToken() !== null && getAuthToken() !== "null") {
         headers = {'Authorization': `Bearer ${getAuthToken()}`};
