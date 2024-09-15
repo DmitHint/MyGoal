@@ -45,13 +45,7 @@ Make sure you have Docker and Docker Compose installed on your system.
     cd mygoal-fitness-center
     ```
 
-2. Create a `.env` file in the root directory of the project and add the following environment variables:
-
-    ```env
-    POSTGRES_PASSWORD=your_postgres_password
-    PGADMIN_DEFAULT_EMAIL=your_pgadmin_email
-    PGADMIN_DEFAULT_PASSWORD=your_pgadmin_password
-    ```
+2. Create a `.env` file in the root directory of the project. Refer to the `.env_example` file.
 
 ### Running the Application
 
@@ -62,10 +56,11 @@ Make sure you have Docker and Docker Compose installed on your system.
     ```
 
 2. Access the application:
+    - Nginx (Reverse Proxy): [http://localhost](http://localhost:8080)
     - Frontend: [http://localhost:3000](http://localhost:3000)
-    - Backend: [http://localhost:8080](http://localhost:8080)
+    - Backend: [http://localhost:8080](http://localhost:8080/api)
+    - Swagger API: [http://localhost:3000](http://localhost:8080/api/swagger-api)
     - pgAdmin: [http://localhost:5050](http://localhost:5050) (Use the email and password from your `.env` file)
-    - Nginx (Reverse Proxy): [http://localhost](http://localhost)
 
 ### Stopping the Application
 
