@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 /**
  * REST API controller for managing Coach data in the FitnessApp backend.
  */
@@ -18,6 +21,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @CrossOrigin
 @RequestMapping("/api/coach")
+@Tag(name = "Coach", description = "Endpoints for managing coach data.")
 public class CoachController {
 
     /**
@@ -30,6 +34,7 @@ public class CoachController {
      *
      * @return A ResponseEntity object containing a list of Coach objects and an HTTP 200 (OK) status code.
      */
+    @Operation(summary = "Get all coaches", description = "Fetch a list of all registered coaches in the system.")
     @GetMapping("/all")
     public ResponseEntity<List<Coach>> getCoaches() {
         return ResponseEntity.ok(coachService.getCoachesList());

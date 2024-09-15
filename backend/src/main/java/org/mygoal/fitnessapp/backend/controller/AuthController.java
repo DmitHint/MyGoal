@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 /**
  * This class defines the REST controller for authentication.
  * It handles login and registration requests.
@@ -22,6 +25,7 @@ import java.net.URI;
 @RestController
 @CrossOrigin
 @RequestMapping("/api")
+@Tag(name = "Authentication", description = "Endpoints for user authentication and registration.")
 public class AuthController {
 
     private final UserService userService;
@@ -33,6 +37,7 @@ public class AuthController {
      * @param credentialsDto the credentials of the user
      * @return the user with a token
      */
+    @Operation(summary = "User Login", description = "Login a user with credentials and return a UserDto object with a token.")
     @PostMapping("/login")
     public ResponseEntity<UserDto> login(@RequestBody @Valid CredentialsDto credentialsDto) {
         UserDto userDto = userService.login(credentialsDto);
@@ -46,6 +51,7 @@ public class AuthController {
      * @param user the user to be registered
      * @return the registered user with a token
      */
+    @Operation(summary = "User Registration", description = "Register a new user and return a UserDto object with a token.")
     @PostMapping("/register")
     public ResponseEntity<UserDto> register(@RequestBody @Valid SignUpDto user) {
         UserDto createdUser = userService.register(user);
@@ -54,4 +60,3 @@ public class AuthController {
     }
 
 }
-

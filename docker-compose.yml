@@ -12,7 +12,6 @@ services:
       WDS_SOCKET_PORT: "0"
       WDS_SOCKET_HOST: '0.0.0.0'
 
-
   backend:
     build: ./backend
     expose:
